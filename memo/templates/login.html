@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<br>
+<div class="container" style="max-width: 100vh;">
+    <p class="display-2">Login</p>
+    <form action="{{ url_for('login') }}" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Username</label>
+        {{form.username(class="form-control")}}
+        </div>
+        <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        {{ form.password(class="form-control", autocomplete="off") }}
+        <div id="emailHelp" class="form-text">Your password is end-to-end encrypted.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+  </form>
+</div>
+{% endblock %}

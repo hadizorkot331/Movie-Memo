@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+<form action="{{ url_for('search_movies') }}" method="POST">
+    <div class="input-group mb-3">
+        <select required name="genre" class="form-select" aria-label="Default select example">
+            <option value="Action">Action</option>
+            <option value="Horror">Horror</option>
+            <option value="Drama">Drama</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Romance">Romance</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Documentary">Documentary</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+        </select>
+    </div>
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Search Movies</button>
+    </div>
+</form>
+</div>
+{% endblock %}

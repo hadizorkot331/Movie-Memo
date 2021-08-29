@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Delete
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+<form action="{{ url_for('delete') }}" method="POST">
+    <select name="selection" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        {% for item in movies %}
+        <option value={{item.movie_id}}>{{item.title}}</option>
+        <p class="h6 text-muted">{{ item.time_added }}</p>
+        {% endfor %}
+    </select>
+    <div class="col-12">
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </div>
+</form>
+</div>
+{% endblock %}
