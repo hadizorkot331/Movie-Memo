@@ -4,6 +4,9 @@ from wtforms.validators import required, Length, DataRequired, ValidationError
 from memo.models import User
 from werkzeug.security import check_password_hash
 
+class searchForm(FlaskForm):
+    movie_name = StringField(label="Movie Name", validators=[required(), DataRequired()])
+
 class RegisterForm(FlaskForm):
     username = StringField(label='username',
         validators=[required(),

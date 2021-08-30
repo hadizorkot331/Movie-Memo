@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Search Name{% endblock %}
+
+{% block content %}
+
+<br>
+<div class="container" style="max-width: 100vh;">
+    <p class="display-2">Enter Name</p>
+    <form action="{{ url_for('search_by_name') }}" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name of Movie</label>
+        {{form.movie_name(class="form-control")}}
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,10 +1,11 @@
 from memo import app, db
 from memo.models import User, Movie
 from flask import render_template, request, get_flashed_messages, flash, redirect, url_for
-from memo.forms import RegisterForm, LoginForm
+from memo.forms import RegisterForm, LoginForm, searchForm
 from werkzeug.security import generate_password_hash
 from flask_login import login_user, current_user, logout_user
 from datetime import datetime
+from sqlalchemy import func
 
 @app.route('/')
 def home():
@@ -118,6 +119,25 @@ def search_movies():
         else:
             flash("Please Login to use this feature!", category="danger")
             return redirect(url_for('login'))
+
+@app.route('/search_by_name', methods=['POST', 'GET'])
+def search_by_name():
+    form = searchForm()
+
+    if form.validate_on_submit():
+        title = form.movie_name.data
+        search = "%{}".format(title)
+        movies = Movie.query.filter(Movie.title.ilike(search), Movie.user_id==current_user.get_id())
+        return render_template("view_ordered.html", movies=movies, genre=title)
+    if form.errors != {}:
+        for error in form.errors.values():
+            flash(error, category="danger")
+
+    
+    flash("FEATURE IS STILL IN BETA AND MIGHT NOT WORK AS EXPECTED", category="warning")
+    return render_template("search_by_name.html", form=form)
+
+
 
 @app.route('/logout')
 def logout():
